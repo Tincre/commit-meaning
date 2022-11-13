@@ -3,8 +3,6 @@ on: [push]
 
 jobs:
   get-commit-meaning:
-    outputs:
-      description: ${{ steps.get_commit_meaning.outputs.description}}
     permissions:
       pull-requests: write
     runs-on: ubuntu-latest
