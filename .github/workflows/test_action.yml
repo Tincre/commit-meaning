@@ -1,0 +1,15 @@
+name: Test Commit Meaning Action
+on: [push]
+
+jobs:
+  get-commit-meaning:
+    runs-on: ubuntu-latest
+    name: Returns a description of the latest commits 
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Get the commit meaning
+        id: get_commit_meaning
+        uses: ./
+        with:
+          openai-api-key: "${{ secrets.OPENAI_API_KEY }}"
