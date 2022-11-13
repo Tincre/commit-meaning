@@ -6,13 +6,15 @@ import logging
 
 openai.api_key = os.getenv("INPUT_OPENAIAPIKEY")
 openai.organization = "org-5rQrsfeNRldhT14Nt33vg1ut"
+MAX_CHARACTERS = 1000
 
 
 def list_commits():
-    return subprocess.run(
+    output = subprocess.run(
         'git log --no-merges --pretty=format:"%s"'.split(" "),
         stdout=subprocess.PIPE,
-    ).stdout.decode("utf-8")
+    ).stdout.decode("utf-8")[:MAX_CHARACTERS]
+    return output
 
 
 def get_prompt(commits: str):
