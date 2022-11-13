@@ -21,7 +21,7 @@ runs:
       shell: bash 
     - name: Pass inputs to shell
       run: |
-        echo "INPUT_OPENAIAPIKEY=${{ secrets.OPENAI_API_KEY }}" >> $GITHUB_ENV
+        echo "INPUT_OPENAIAPIKEY=${{ inputs.openai-api-key }}" >> $GITHUB_ENV
       shell: bash 
     - name: Checkout the repo 
       uses: actions/checkout@v3
