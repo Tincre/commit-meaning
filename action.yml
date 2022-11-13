@@ -1,16 +1,33 @@
 # action.yml
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Commit Meaning'
+description: 'In a paragraph, describe the commits for a PR.'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  openai-api-key:  # id of input
+    description: 'Your OpenAI API key.'
     required: true
-    default: 'World'
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  description: # id of output
+    description: 'The PR commit log description.'
+    value: ${{ steps.get-commit-meaning.outputs.description }}
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.who-to-greet }}
+  using: 'composite'
+  steps:
+    - name: Install Python 
+      uses: actions/setup-python@v4
+      with: 
+        python-version: '3.10'
+    - name: Install Dependencies
+      run: pip install -r requirements.txt
+      shell: bash 
+    - name: Pass inputs to shell
+      run: |
+        echo "INPUT_OPENAIAPIKEY=${{ inputs.openaiapikey }}" >> $GITHUB_ENV
+      shell: bash 
+    - name: Checkout the repo 
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Get commit meaning
+      id: get-commit-meaning 
+      run: python main.py
+      shell: bash
