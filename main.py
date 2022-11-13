@@ -1,21 +1,20 @@
 import os
-import shlex
 import openai
-import sys
 import subprocess
 import logging
 
 openai.api_key = os.getenv("INPUT_OPENAIAPIKEY")
 openai.organization = "org-5rQrsfeNRldhT14Nt33vg1ut"
 MAX_CHARACTERS = 1000
-BASE_PROMPT = "Summarize the following code commits in two, three, or four sentences with no more than ten words in any sentence"
+BASE_PROMPT = "Summarize the following code commits into a single paragraph. Do not use bullet points. Do not use a list."
 
 
 def list_commits():
     output = subprocess.run(
         'git log --no-merges --pretty=format:"%s"'.split(" "),
         stdout=subprocess.PIPE,
-    ).stdout.decode("utf-8")[:MAX_CHARACTERS]
+        universal_newlines=True,
+    ).stdout[:MAX_CHARACTERS]
     return output
 
 
@@ -34,9 +33,18 @@ def main(prompt: str):
         presence_penalty=0,
     )
     if "choices" in response:
-        if len(response["choices"]) > 0:
-            if response["choices"][0]["text"]:
-                print(shlex.quote(response["choices"][0]["text"]))
+        if len(response["choices"]) > 0:  # type: ignore
+            if response["choices"][0]["text"]:  # type: ignore
+                print(
+                    r"{}".format(
+                        response["choices"][0]["text"]
+                        .strip("\n")
+                        .strip("\r")
+                        .strip('"')
+                        .strip("'")
+                        .strip()
+                    )
+                )
             else:
                 print("The text reponse contained nothing.")
         else:
@@ -46,6 +54,7 @@ def main(prompt: str):
 
 
 # if __name__ == "__main__":
+# logging.basicConfig(level=logging.DEBUG)
 logging.debug(f"Starting the commit translation process. {os.getcwd()}")
 commits: str = list_commits()
 logging.debug(f"The commits: {commits}")
