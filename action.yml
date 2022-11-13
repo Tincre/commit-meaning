@@ -20,8 +20,7 @@ runs:
       run: pip install -r requirements.txt
       shell: bash 
     - name: Pass inputs to shell
-      run: |
-        echo "INPUT_OPENAIAPIKEY=${{ inputs.openai-api-key }}" >> $GITHUB_ENV
+      run: echo "INPUT_OPENAIAPIKEY=${{ inputs.openai-api-key }}" >> $GITHUB_ENV
       shell: bash 
     - name: Checkout the repo 
       uses: actions/checkout@v3
@@ -29,5 +28,10 @@ runs:
         fetch-depth: 0
     - name: Get commit meaning
       id: get-commit-meaning 
-      run: echo "::set-output name=description::$(python main.py)"
+      run: |
+        output=$(python main.py)
+        output="${output//'%'/'%25'}"
+        output="${output//$'\n'/'%0A'}"
+        output="${output//$'\r'/'%0D'}"
+        echo "::set-output name=description::$output"
       shell: bash
