@@ -50,10 +50,6 @@ runs:
         echo "INPUT_PRESENCEPENALTY=${{ inputs.presencce-penalty }}" >> $GITHUB_ENV
         echo "INPUT_PROMPTINSTRUCTIONS=${{ inputs.prompt-instructions }}" >> $GITHUB_ENV
       shell: bash 
-    - name: Checkout the repo 
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
     - name: Get commit meaning
       id: get-commit-meaning 
       run: |
