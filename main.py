@@ -1,4 +1,5 @@
 import os
+import shlex
 import openai
 import sys
 import subprocess
@@ -7,6 +8,7 @@ import logging
 openai.api_key = os.getenv("INPUT_OPENAIAPIKEY")
 openai.organization = "org-5rQrsfeNRldhT14Nt33vg1ut"
 MAX_CHARACTERS = 1000
+BASE_PROMPT = "Summarize the following code commits in two, three, or four sentences with no more than ten words in any sentence"
 
 
 def list_commits():
@@ -18,14 +20,14 @@ def list_commits():
 
 
 def get_prompt(commits: str):
-    return f"Summarize the following commits from the developer, in at least one sentence but up to four sentences, that comprise a paragraph:\n\n{commits}"
+    return f"{BASE_PROMPT}:\n\n{commits}"
 
 
 def main(prompt: str):
     response = openai.Completion.create(
         model="text-davinci-002",
         prompt=prompt,
-        temperature=0.7,
+        temperature=0.9,
         max_tokens=256,
         top_p=1,
         frequency_penalty=0,
@@ -34,7 +36,7 @@ def main(prompt: str):
     if "choices" in response:
         if len(response["choices"]) > 0:
             if response["choices"][0]["text"]:
-                print(response["choices"][0]["text"])
+                print(shlex.quote(response["choices"][0]["text"]))
             else:
                 print("The text reponse contained nothing.")
         else:
