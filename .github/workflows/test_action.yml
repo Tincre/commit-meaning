@@ -16,7 +16,6 @@ jobs:
         uses: ./
         with:
           openai-api-key: "${{ secrets.OPENAI_API_KEY }}"
-        shell: bash
 
       - name: Pring the meaning string
         run: echo ${{ steps.get_commit_meaning.outputs.description }}
