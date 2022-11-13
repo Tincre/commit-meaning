@@ -29,5 +29,5 @@ runs:
         fetch-depth: 0
     - name: Get commit meaning
       id: get-commit-meaning 
-      run: echo "::set-output name=description::$(python main.py)"
+      run: echo "description=$(python main.py)" >> $GITHUB_OUTPUT
       shell: bash
