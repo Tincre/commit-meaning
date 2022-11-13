@@ -1,5 +1,3 @@
-#!/bin/sh -l
+#!/bin/bash
 
-echo "Hello, world"
-time=$(date)
-echo "time=$time" >> $GITHUB_OUTPUT
+echo "description=$(python3 main.py)" >> $GITHUB_OUTPUT
