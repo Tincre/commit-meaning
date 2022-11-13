@@ -13,7 +13,7 @@ PRESENCE = os.getenv("INPUT_PRESENCEPENALTY") or 0
 FREQUENCY = os.getenv("INPUT_FREQUENCYPENALTY") or 0
 
 ADDITIONAL_INSTRUCTION = (
-    os.getenv("INPUT_PROMPT_INSTRUCTIONS")
+    os.getenv("INPUT_PROMPTINSTRUCTIONS")
     or "Ignore words between colons, i.e. :"
 )
 BASE_PROMPT = f"Summarize the following code commits into a single paragraph. Do not use bullet points. Do not use a list. {ADDITIONAL_INSTRUCTION}"

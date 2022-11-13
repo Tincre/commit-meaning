@@ -5,6 +5,27 @@ inputs:
   openai-api-key:  # id of input
     description: 'Your OpenAI API key.'
     required: true
+  temperature: 
+    description: 'The OpenAI temperature parameter'
+    required: true
+    default: .7
+  tokens:
+    description: 'The OpenAI tokens parameter'
+    required: true
+    default: 256
+  frequency-penalty:
+    description: 'The OpenAI frequency_penalty parameter'
+    required: true 
+    default: 0
+  presence-penalty:
+    description: 'The OpenAI presence_penalty parameter'
+    required: true
+    default: 0
+  prompt-instructions:
+    description: 'Additional input instructions for the prompt'
+    required: true 
+    default: ':bug: refers to a fixed bug, :recycle: means to refactor code, :sparkles: means something is new in the code, :wrench: refers to code that is configuration or low-level in nature, :fire: means to remove code, :construction: references a commit considered to be work in-progress, and :notebook: references changes to documentation.'
+
 outputs:
   description: # id of output
     description: 'The PR commit log description.'
@@ -21,7 +42,13 @@ runs:
       shell: bash 
 
     - name: Pass inputs to shell
-      run: echo "INPUT_OPENAIAPIKEY=${{ inputs.openai-api-key }}" >> $GITHUB_ENV
+      run: |
+        echo "INPUT_OPENAIAPIKEY=${{ inputs.openai-api-key }}" >> $GITHUB_ENV
+        echo "INPUT_TEMPERATURE=${{ inputs.temperature }}" >> $GITHUB_ENV
+        echo "INPUT_TOKENS=${{ inputs.tokens }}" >> $GITHUB_ENV
+        echo "INPUT_FREQUENCYPENALTY=${{ inputs.frequency-penalty }}" >> $GITHUB_ENV
+        echo "INPUT_PRESENCEPENALTY=${{ inputs.presencce-penalty }}" >> $GITHUB_ENV
+        echo "INPUT_PROMPTINSTRUCTIONS=${{ inputs.prompt-instructions }}" >> $GITHUB_ENV
       shell: bash 
     - name: Checkout the repo 
       uses: actions/checkout@v3
