@@ -5,6 +5,8 @@ jobs:
   get-commit-meaning:
     outputs:
       description: ${{ steps.get_commit_meaning.outputs.description}}
+    permissions:
+      pull-requests: write
     runs-on: ubuntu-latest
     name: Returns a description of the latest commits
     steps:
@@ -15,14 +17,8 @@ jobs:
         uses: ./
         with:
           openai-api-key: "${{ secrets.OPENAI_API_KEY }}"
-
-  write-to-pr:
-    needs: get-commit-meaning
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-    steps:
-      - uses: mshick/add-pr-comment@v2
+      - name: Add pr comment
+        uses: mshick/add-pr-comment@v2
         with:
           message: |
-            ${{ needs.get-commit-meaning.ouputs.description }}
+            ${{ steps.get_commit_meaning.outputs.description }}
