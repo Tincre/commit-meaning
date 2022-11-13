@@ -29,5 +29,5 @@ runs:
         fetch-depth: 0
     - name: Get commit meaning
       id: get-commit-meaning 
-      run: python main.py
+      run: echo "::set-output name=random-number::$(python main.py)"
       shell: bash
