@@ -54,8 +54,5 @@ runs:
       id: get-commit-meaning 
       run: |
         output=$(python main.py)
-        output="${output//'%'/'%25'}"
-        output="${output//$'\n'/'%0A'}"
-        output="${output//$'\r'/'%0D'}"
         echo "::set-output name=description::${output@Q}"
       shell: bash
