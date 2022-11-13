@@ -31,3 +31,7 @@ runs:
       id: get-commit-meaning 
       run: python main.py
       shell: bash
+    - name: Write to PR
+      uses: mshick/add-pr-comment@v2
+        with:
+          message: "${{ outputs.description }}"
