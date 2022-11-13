@@ -22,7 +22,7 @@ jobs:
     permissions:
       pull-requests: write
     steps:
-      uses: mshick/add-pr-comment@v2
-      with:
-        message: |
-          ${{ needs.get-commit-meaning.ouputs.description }}
+      - uses: mshick/add-pr-comment@v2
+        with:
+          message: |
+            ${{ needs.get-commit-meaning.ouputs.description }}
