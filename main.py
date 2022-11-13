@@ -4,11 +4,8 @@ import sys
 import subprocess
 import logging
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.api_key = os.getenv("INPUT_OPENAIAPIKEY")
 openai.organization = "org-5rQrsfeNRldhT14Nt33vg1ut"
-
-# prompt = "Summarize the following commits from the developer, in at least one sentence but up to four sentences, that comprise a paragraph. :sparkles: means 'new':\n\n:sparkles: add initial Dockerfile\n:sparkles: add yaml specification for commit-meaning action\n:sparkles: :notebook: add initial documentation overview for commit-meaning\n:sparkles: add initial entrypoint barebones"
-# prompt = "Generate a blog on the topic: digital marketing in music using b00st.com."
 
 
 def list_commits():
@@ -44,11 +41,11 @@ def main(prompt: str):
             )
 
 
-if __name__ == "__main__":
-    logging.debug("Starting the commit translation process.")
-    commits: str = list_commits()
-    logging.debug(f"The commits: {commits}")
-    prompt: str = get_prompt(commits)
-    logging.info(f"The prompt: {prompt}")
-    main(prompt)
-    logging.debug("main(prompt) has been successfully run. Goodbye.")
+# if __name__ == "__main__":
+logging.debug(f"Starting the commit translation process. {os.getcwd()}")
+commits: str = list_commits()
+logging.debug(f"The commits: {commits}")
+prompt: str = get_prompt(commits)
+logging.info(f"The prompt: {prompt}")
+main(prompt)
+logging.debug("main(prompt) has been successfully run. Goodbye.")
