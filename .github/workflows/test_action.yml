@@ -16,9 +16,7 @@ jobs:
         with:
           openai-api-key: "${{ secrets.OPENAI_API_KEY }}"
       - name: Pring the meaning string
-        run: |
-          echo "Testing the developer's meaning"
-          echo "${{ steps.get_commit_meaning.outputs.description }}"
+        run: echo "${{ steps.get_commit_meaning.outputs.description }}"
       - name: Add pr comment
         uses: mshick/add-pr-comment@v2
         with:
