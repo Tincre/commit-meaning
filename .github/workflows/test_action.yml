@@ -16,4 +16,5 @@ jobs:
       - name: Write to PR
         uses: mshick/add-pr-comment@v2
           with:
-            message: "${{ steps.get_commit_meaning.description }}"
+            message: |
+              ${{ steps.get_commit_meaning.description }}
