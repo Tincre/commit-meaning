@@ -54,5 +54,6 @@ runs:
       id: get-commit-meaning 
       run: |
         output=$(python main.py)
-        echo "::set-output name=description::${output@Q}"
+        output=$(echo ${output@Q} | sed "s/^.//" | sed "s/.$//")
+        echo "::set-output name=description::${output}"
       shell: bash
