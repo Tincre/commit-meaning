@@ -17,7 +17,9 @@ paragraph describing the git commits involved.
 
 ## Example usage
 
+```yaml
 uses: actions/commit-meaning
 with:
   openai-api-key: '$OPENAI_API_KEY'
   github-token: '$GITHUB_TOKEN'
+```
