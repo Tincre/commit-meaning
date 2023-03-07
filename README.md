@@ -23,3 +23,32 @@ with:
   openai-api-key: '$OPENAI_API_KEY'
   github-token: '$GITHUB_TOKEN'
 ```
+
+## Options
+
+You can fully customize the behavior of this action.
+
+- `temperature`: The OpenAI temperature parameter
+- `tokens`: The OpenAI tokens paremter (number of tokens)
+- `frequency-penalty`: The OpenAI frequency_penalty parameter
+- `presence-penalty`: The OpenAI presence_penalty parameter
+- `prompt-instructions`: Additional input instructions for the prompt
+
+### Default `prompt-instructions`
+
+We employ the use of [`gitmoji`](https://gitmoji.dev) at [Tincre](https://tincre.com) to annotate our commit messages with rich categorization.
+
+This action by default uses the following prompt by default:
+
+- 🐞 and 🐛 "refers to a bug fix"
+- ♻️ "means to refactor code or content"
+- ✨ "means something is new in the code"
+- 🔧 "refers to code that is configuration or low-level in nature"
+- 🔥 "means to remove code or remove content"
+- 🚧 "references a commit considered to be work in-progress", and
+- 📓 "references changes to documentation."
+
+## Contributions
+
+We :heart: contributions! File an issue, PR, or suggestion to improve this
+action.
