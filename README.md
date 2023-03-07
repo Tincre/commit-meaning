@@ -20,8 +20,8 @@ paragraph describing the git commits involved.
 ```yaml
 uses: actions/commit-meaning
 with:
-  openai-api-key: '$OPENAI_API_KEY'
-  github-token: '$GITHUB_TOKEN'
+  openai-api-key: "$OPENAI_API_KEY"
+  github-token: "$GITHUB_TOKEN"
 ```
 
 ## Options
@@ -52,3 +52,9 @@ This action by default uses the following prompt by default:
 
 We :heart: contributions! File an issue, PR, or suggestion to improve this
 action.
+
+## License
+
+This action is liberally licensed under the [MIT license](/LICENSE).
+
+And we at [Tincre](https://tincre.com) would love attribution, if you feel so inclined.
