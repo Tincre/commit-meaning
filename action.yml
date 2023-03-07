@@ -1,8 +1,9 @@
 # action.yml
 name: "Commit Meaning"
 description: "In a paragraph, describe the commits for a PR."
-icon: "git-pull-request"
-color: "purple"
+branding:
+  icon: "git-pull-request"
+  color: "purple"
 inputs:
   openai-api-key: # id of input
     description: "Your OpenAI API key."
