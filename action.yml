@@ -1,45 +1,47 @@
 # action.yml
-name: 'Commit Meaning'
-description: 'In a paragraph, describe the commits for a PR.'
+name: "Commit Meaning"
+description: "In a paragraph, describe the commits for a PR."
+icon: "git-pull-request"
+color: "purple"
 inputs:
-  openai-api-key:  # id of input
-    description: 'Your OpenAI API key.'
+  openai-api-key: # id of input
+    description: "Your OpenAI API key."
     required: true
-  temperature: 
-    description: 'The OpenAI temperature parameter'
+  temperature:
+    description: "The OpenAI temperature parameter"
     required: true
     default: .7
   tokens:
-    description: 'The OpenAI tokens parameter'
+    description: "The OpenAI tokens parameter"
     required: true
     default: 256
   frequency-penalty:
-    description: 'The OpenAI frequency_penalty parameter'
-    required: true 
+    description: "The OpenAI frequency_penalty parameter"
+    required: true
     default: 0
   presence-penalty:
-    description: 'The OpenAI presence_penalty parameter'
+    description: "The OpenAI presence_penalty parameter"
     required: true
     default: 0
   prompt-instructions:
-    description: 'Additional input instructions for the prompt'
-    required: true 
-    default: ':bug: refers to a fixed bug, :recycle: means to refactor code, :sparkles: means something is new in the code, :wrench: refers to code that is configuration or low-level in nature, :fire: means to remove code, :construction: references a commit considered to be work in-progress, and :notebook: references changes to documentation.'
+    description: "Additional input instructions for the prompt"
+    required: true
+    default: ":bug: refers to a bug fix, :recycle: means to refactor code, :sparkles: means something is new in the code, :wrench: refers to code that is configuration or low-level in nature, :fire: means to remove code or remove content, :construction: references a commit considered to be work in-progress, and :notebook: references changes to documentation."
 
 outputs:
   description: # id of output
-    description: 'The PR commit log description.'
+    description: "The PR commit log description."
     value: ${{ steps.get-commit-meaning.outputs.description }}
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
-    - name: Install Python 
+    - name: Install Python
       uses: actions/setup-python@v4
-      with: 
-        python-version: '3.11'
+      with:
+        python-version: "3.11"
     - name: Install Dependencies
       run: pip install -r requirements.txt
-      shell: bash 
+      shell: bash
 
     - name: Pass inputs to shell
       run: |
@@ -49,9 +51,9 @@ runs:
         echo "INPUT_FREQUENCYPENALTY=${{ inputs.frequency-penalty }}" >> $GITHUB_ENV
         echo "INPUT_PRESENCEPENALTY=${{ inputs.presencce-penalty }}" >> $GITHUB_ENV
         echo "INPUT_PROMPTINSTRUCTIONS=${{ inputs.prompt-instructions }}" >> $GITHUB_ENV
-      shell: bash 
+      shell: bash
     - name: Get commit meaning
-      id: get-commit-meaning 
+      id: get-commit-meaning
       run: |
         output=$(python main.py)
         output=$(echo ${output@Q} | sed "s/^.//" | sed "s/.$//")
