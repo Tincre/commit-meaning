@@ -5,7 +5,7 @@ import logging
 from typing import Union
 
 openai.api_key = os.getenv("INPUT_OPENAIAPIKEY")
-openai.organization = "org-5rQrsfeNRldhT14Nt33vg1ut"
+openai.organization = os.getenv("INPUT_OPENAIORG")
 MAX_CHARACTERS = os.getenv("INPUT_MAXCHARACTERS") or 1000
 TEMPERATURE = os.getenv("INPUT_TEMPERATURE") or 0.7
 TOKENS = os.getenv("INPUT_TOKENS") or 256
