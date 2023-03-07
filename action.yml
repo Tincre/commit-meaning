@@ -26,7 +26,7 @@ inputs:
   prompt-instructions:
     description: "Additional input instructions for the prompt"
     required: true
-    default: ":bug: refers to a bug fix, :recycle: means to refactor code, :sparkles: means something is new in the code, :wrench: refers to code that is configuration or low-level in nature, :fire: means to remove code or remove content, :construction: references a commit considered to be work in-progress, and :notebook: references changes to documentation."
+    default: ":bug: refers to a bug fix, :lady_bug: refers to a bug fix, :recycle: means to refactor code or to refactor content, :sparkles: means something is new in the code, :wrench: refers to code that is configuration or low-level in nature, :fire: means to remove code or remove content, :construction: references a commit considered to be work in-progress, and :notebook: references changes to documentation."
 
 outputs:
   description: # id of output
