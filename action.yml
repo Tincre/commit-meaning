@@ -8,6 +8,9 @@ inputs:
   openai-api-key: # id of input
     description: "Your OpenAI API key."
     required: true
+  openai-org: # openai organization id
+    description: "Your OpenAI organization id."
+    required: true
   temperature:
     description: "The OpenAI temperature parameter"
     required: true
@@ -47,6 +50,7 @@ runs:
     - name: Pass inputs to shell
       run: |
         echo "INPUT_OPENAIAPIKEY=${{ inputs.openai-api-key }}" >> $GITHUB_ENV
+        echo "INPUT_OPENAIORG=${{ inputs.openai-org }}" >> $GITHUB_ENV
         echo "INPUT_TEMPERATURE=${{ inputs.temperature }}" >> $GITHUB_ENV
         echo "INPUT_TOKENS=${{ inputs.tokens }}" >> $GITHUB_ENV
         echo "INPUT_FREQUENCYPENALTY=${{ inputs.frequency-penalty }}" >> $GITHUB_ENV
