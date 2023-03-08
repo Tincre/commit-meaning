@@ -21,6 +21,7 @@ paragraph describing the git commits involved.
 uses: actions/commit-meaning
 with:
   openai-api-key: "$OPENAI_API_KEY"
+  openai-org: "$OPENAI_ORG"
   github-token: "$GITHUB_TOKEN"
 ```
 
