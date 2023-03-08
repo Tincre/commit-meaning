@@ -44,7 +44,7 @@ runs:
       with:
         python-version: "3.11"
     - name: Install Dependencies
-      run: pip install -r requirements.txt
+      run: cd ${{ github.action_path }} && pip install -r requirements.txt
       shell: bash
 
     - name: Pass inputs to shell
@@ -60,7 +60,8 @@ runs:
     - name: Get commit meaning
       id: get-commit-meaning
       run: |
-        output=$(python main.py)
-        output=$(echo ${output@Q} | sed "s/^.//" | sed "s/.$//")
+        action_path=${{ github.action_path }}
+        output=$(cd ${action_path} && python main.py)
+        output=$(cd ${action_path} && echo ${output@Q} | sed "s/^.//" | sed "s/.$//")
         echo "::set-output name=description::${output}"
       shell: bash
