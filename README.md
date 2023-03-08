@@ -15,6 +15,10 @@ paragraph describing the git commits involved.
 
 **Required** Your Github token with read/write permissions.
 
+### `OPENAI_ORG`
+
+**Required** Your OpenAI organization id.
+
 ## Example usage
 
 ```yaml
